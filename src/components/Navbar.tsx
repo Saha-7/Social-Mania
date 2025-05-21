@@ -48,6 +48,9 @@ const Navbar = () => {
         </div>
       </div>
 
+      {/* Desktop Auth */}
+      <div></div>
+      
       {/* Mobile Menu */}
           {isMobileMenuOpen &&(<div className="md:hidden bg-[rgba(10,10,10,0.9)]">
             <div className="px-2 pt-2 pb-3 space-y-1">
