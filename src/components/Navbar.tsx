@@ -1,8 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router";
+import { useAuth } from "../context/AuthContext";
 
 const Navbar = () => {
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const {signInWithGitHub, signOut, user} = useAuth()
+
   return (
     <nav className="fixed top-0 w-full z-40 bg-[rgba(10,10,10,0.8)] backdrop-blur-lg border-b border-white/10 shadow-lg">
       <div className="max-w-5xl mx-auto px-4">
@@ -49,7 +53,9 @@ const Navbar = () => {
       </div>
 
       {/* Desktop Auth */}
-      <div></div>
+      <div>
+        <button onClick={signInWithGitHub}>Sign In With GitHub</button>
+      </div>
       
       {/* Mobile Menu */}
           {isMobileMenuOpen &&(<div className="md:hidden bg-[rgba(10,10,10,0.9)]">
