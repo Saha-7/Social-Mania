@@ -7,6 +7,7 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const {signInWithGitHub, signOut, user} = useAuth()
 
+  const displayName = user?.user_metadata?.user_name
   return (
     <nav className="fixed top-0 w-full z-40 bg-[rgba(10,10,10,0.8)] backdrop-blur-lg border-b border-white/10 shadow-lg">
       <div className="max-w-5xl mx-auto px-4">
@@ -22,6 +23,21 @@ const Navbar = () => {
             <Link to={"/communities"} className="text-gray-300 hover:text-white transition-colors">Communities</Link>
             <Link to={"/community/create"} className="text-gray-300 hover:text-white transition-colors">Create Community</Link>
           </div>
+
+          {/* Desktop Auth */}
+      <div className="hidden md:flex justify-end items-center max-w-5xl mx-auto px-4">
+        {user ? (
+          <div className="hidden md:flex items-center space-x-4">
+            {user.user_metadata?.avatar_url && (
+              <img src={user?.user_metadata?.avatar_url} alt="avatar" className="w-8 h-8 rounded-full"/>
+            )}
+            <span className="text-gray-300">{displayName}</span>
+            <button onClick={signOut} className="bg-red-500 text-white px-4 py-2 rounded-md">Sign Out</button>
+          </div>
+        ) : (
+          <button onClick={signInWithGitHub} className="hidden md:block bg-blue-500 text-white px-4 py-2 rounded-md">Sign In With GitHub</button>
+        )}
+      </div>
 
           {/* Mobile Menu Button*/}
           <div className="md:hidden">
@@ -52,10 +68,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Desktop Auth */}
-      <div>
-        <button onClick={signInWithGitHub}>Sign In With GitHub</button>
-      </div>
+      
       
       {/* Mobile Menu */}
           {isMobileMenuOpen &&(<div className="md:hidden bg-[rgba(10,10,10,0.9)]">
