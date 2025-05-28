@@ -2,13 +2,13 @@ import { ChangeEvent, useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { supabase } from "../supabase-client";
 import { useAuth } from "../context/AuthContext";
-import { Community, fetchCommunities } from "./CommunityList";
+// import { Community, fetchCommunities } from "./CommunityList";
 
 interface PostInput {
   title: string;
   content: string;
-  avatar_url: string | null;
-  community_id?: number | null;
+  // avatar_url: string | null;
+  // community_id?: number | null;
 }
 
 const createPost = async (post: PostInput, imageFile: File) => {
@@ -42,10 +42,10 @@ export const CreatePost = () => {
 
   const { user } = useAuth();
 
-  const { data: communities } = useQuery<Community[], Error>({
-    queryKey: ["communities"],
-    queryFn: fetchCommunities,
-  });
+  // const { data: communities } = useQuery<Community[], Error>({
+  //   queryKey: ["communities"],
+  //   queryFn: fetchCommunities,
+  // });
 
   const { mutate, isPending, isError } = useMutation({
     mutationFn: (data: { post: PostInput; imageFile: File }) => {
@@ -60,8 +60,8 @@ export const CreatePost = () => {
       post: {
         title,
         content,
-        avatar_url: user?.user_metadata.avatar_url || null,
-        community_id: communityId,
+       // avatar_url: user?.user_metadata.avatar_url || null,
+       // community_id: communityId,
       },
       imageFile: selectedFile,
     });
@@ -107,7 +107,7 @@ export const CreatePost = () => {
         />
       </div>
 
-      <div>
+      {/* <div>
         <label> Select Community</label>
         <select id="community" onChange={handleCommunityChange}>
           <option value={""}> -- Choose a Community -- </option>
@@ -117,7 +117,7 @@ export const CreatePost = () => {
             </option>
           ))}
         </select>
-      </div>
+      </div> */}
 
       <div>
         <label htmlFor="image" className="block mb-2 font-medium">
